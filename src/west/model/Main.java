@@ -2,8 +2,11 @@ package west.model;
 
 public class Main {
 	public static void main(String[] args) {
+		EntityManager.reset();
 		Miner miner = new Miner(458, "Bob");
+		EntityManager.registerEntity(miner);
 		MinersWife wife = new MinersWife(82, "Elsa");
+		EntityManager.registerEntity(wife);
 		try {
 			for(int i=0; i<40; ++i){
 				miner.update();

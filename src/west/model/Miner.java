@@ -1,11 +1,13 @@
 package west.model;
 
+import west.messaging.Telegram;
+
 public class Miner extends BaseGameEntity {
 	public static final int ComfortLevel = 5;
 	public static final int MaxNuggets = 3;
 	public static final int ThirstLevel = 5;
 	public static final int TirednessThreshold = 5;
-	private StateMachine<Miner> pStateMachine;
+	//private StateMachine<Miner> pStateMachine;
 	private Location location;
 	private int iGoldCarried;
 	private int iMoneyInBank;
@@ -56,4 +58,6 @@ public class Miner extends BaseGameEntity {
 	public int wealth(){return iMoneyInBank;}
 	public void setWealth(int val){iMoneyInBank = val;}
 	public void buyAndDrinkAWhiskey(){iThirst = 0; iMoneyInBank -= 2;}
+	
+	public boolean handleMessage(final Telegram msg){return false;}
 }

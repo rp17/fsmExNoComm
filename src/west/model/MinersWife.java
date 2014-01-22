@@ -1,7 +1,9 @@
 package west.model;
 
+import west.messaging.Telegram;
+
 public class MinersWife extends BaseGameEntity {
-	private StateMachine<MinersWife> pStateMachine;
+	
 	private Location location;
 	public MinersWife(int ID, String name){
 		super(ID, name);
@@ -17,4 +19,5 @@ public class MinersWife extends BaseGameEntity {
 	public StateMachine<MinersWife> getFSM(){return pStateMachine;}
 	public Location getLocation() {return location;}
 	public void changeLocation(Location loc) {location = loc;}
+	public boolean handleMessage(final Telegram msg){return false;}
 }
