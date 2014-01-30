@@ -9,18 +9,20 @@ package west.model;
 //
 //------------------------------------------------------------------------
 
+import west.messaging.Telegram;
 
-public abstract class State<E> {
+public abstract class State<T extends BaseGameEntity> {
 
 	private static final String name = "";
 	//this will execute when the state is entered
-	abstract public void enter(E obj);
+	abstract public void enter(T entity);
 	
 	//this is the states normal update function
-	abstract public void execute(E obj);
+	abstract public void execute(T entity);
 	
 	//this will execute when the state is exited. (My word, isn't
 	//life full of surprises... ;o))
-	abstract public void exit(E obj);
+	abstract public void exit(T entity);
+	boolean onMessage(T entity, final Telegram msg){return false;}
 	public String getStateType(){return name;}
 }

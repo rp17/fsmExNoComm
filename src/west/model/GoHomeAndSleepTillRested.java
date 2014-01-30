@@ -1,4 +1,7 @@
 package west.model;
+import west.messaging.Dispatcher;
+import west.messaging.Message;
+import west.messaging.Telegram;
 
 public class GoHomeAndSleepTillRested extends State<Miner> {
 
@@ -25,6 +28,8 @@ public class GoHomeAndSleepTillRested extends State<Miner> {
 		   if(miner.getLocation() != Location.shack){
 			   System.out.println(miner.getName() + " Walkin' home");
 			   miner.changeLocation(Location.shack);
+			   
+			   Dispatcher.dispatchMsg(0.0, miner.ID(), 1, Message.MSG_IM_HOME, null);
 		   }
 	   }
 	   public void execute(Miner miner){
@@ -46,5 +51,14 @@ public class GoHomeAndSleepTillRested extends State<Miner> {
 	   }
 	   public void exit(Miner miner){
 		   System.out.println(miner.getName() + " Leavin' the house");
+	   }
+	   
+	   boolean onMessage(Miner miner, final Telegram msg){
+		   if(msg.getMsgID() == Message.MSG_STEW_READY) {
+			   System.out.println("Message handled by " + miner.getName() + " at time: " + Clock.getTimeInSec());
+			   System.out.println(miner.getName() + " : Okay hun, ahm a-coming' !");
+			   return true;
+		   }
+		   return false;
 	   }
 }

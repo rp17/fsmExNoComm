@@ -1,10 +1,10 @@
 package west.model;
 import west.messaging.Telegram;
-public abstract class BaseGameEntity<T extends BaseGameEntity> {
+public abstract class BaseGameEntity {
 	//every entity must have a unique identifying number
 	private int m_ID;
 	private String name;
-	protected StateMachine<T> pStateMachine;
+	protected StateMachine pStateMachine;
 	static private int m_iNextValidID = 0;
 	
 	public BaseGameEntity(int ID, String name){
@@ -20,5 +20,5 @@ public abstract class BaseGameEntity<T extends BaseGameEntity> {
 	}
 	public int ID(){return m_ID;}
 	public String getName(){return name;}
-	abstract public boolean handleMessage(final Telegram msg);
+	public boolean handleMessage(final Telegram msg){return pStateMachine.handleMessage(msg);}
 }

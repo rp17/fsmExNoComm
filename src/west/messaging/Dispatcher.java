@@ -19,7 +19,7 @@ public class Dispatcher {
 	 * a TreeSet is used as the container for the delayed message because of
 	 * the benefit of automatic sorting and avoidance of duplicates. Messages
 	 * are sorted by their dispatch time. */
-	private TreeSet<Telegram> priorityQueue;
+	private TreeSet<Telegram> priorityQueue = new TreeSet<Telegram>();
 	
 	private static void discharge(BaseGameEntity receiver, Telegram msg) {
 		if (!receiver.handleMessage(msg)) {
@@ -81,7 +81,7 @@ public class Dispatcher {
 			telegram.dispatchDelay -= delta;
 			if (telegram.dispatchDelay <= 0.0) {
 				toRemove.add(telegram);
-				BaseGameEntity receiver = EntityManager.getEntityFromID(telegram.receiverID);
+				BaseGameEntity receiver = EntityManager.getEntityFromID(telegram.getReceiverID());
 				discharge(receiver, telegram);
 			}
 		}

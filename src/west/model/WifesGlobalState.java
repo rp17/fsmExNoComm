@@ -2,6 +2,9 @@ package west.model;
 
 import java.util.Random;
 
+import west.messaging.Telegram;
+import west.messaging.Message;
+
 public class WifesGlobalState extends State<MinersWife>{
 	private volatile static WifesGlobalState singleton;
 	private Random rand = new Random();
@@ -28,4 +31,13 @@ public class WifesGlobalState extends State<MinersWife>{
 		   }
 	   }
 	   public void exit(MinersWife wife){}
+	   boolean onMessage(MinersWife wife, final Telegram msg){
+		   if(msg.getMsgID() == Message.MSG_IM_HOME) {
+			   System.out.println("Message handled by " + wife.getName() + " at time: " + Clock.getTimeInSec());
+			   System.out.println(wife.getName() + ": Hi honey. Let me make you some of mah fine country stew");
+			   wife.getFSM().changeState(CookStew.getSingleton());
+		   }
+		   
+		   return true;
+	   }
 }

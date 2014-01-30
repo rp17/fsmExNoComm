@@ -58,6 +58,4 @@ public class Miner extends BaseGameEntity {
 	public int wealth(){return iMoneyInBank;}
 	public void setWealth(int val){iMoneyInBank = val;}
 	public void buyAndDrinkAWhiskey(){iThirst = 0; iMoneyInBank -= 2;}
-	
-	public boolean handleMessage(final Telegram msg){return false;}
 }
